@@ -9,76 +9,75 @@ namespace MyFps
     public class DoorCellOpen : MonoBehaviour
     {
         #region Variables
-        //action UI
-        public GameObject actionUi;
-        public GameObject extraCrossUi;
-        public TextMeshProUGUI actionText;
-        [SerializeField] private string action = "Open The Door";
         private float theDistance;
 
-        public Animator animator;
-        private Collider Collider;
-        public AudioSource AudioSource;
-        private bool isOpen = false;
+        //action UI
+        public GameObject actionUI;
+        public TextMeshProUGUI actionText;
+        [SerializeField] private string action = "Open The Door";
+        public GameObject extraCross;
+
+        //action
+        private Animator animator;
+        private Collider m_Collider;
+        public AudioSource audioSource;
         #endregion
+
+        private void Start()
+        {
+            animator = GetComponent<Animator>();
+            m_Collider = GetComponent<BoxCollider>();
+        }
 
         private void Update()
         {
             theDistance = PlayerCasting.distanceFromTarget;
-            Collider=GetComponent<Collider>();
-            animator = GetComponent<Animator>();
-        }
-
-        void DoorOpen()
-        {
-            //e키입력시 도어 오픈 
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-
-            }
         }
 
 
+        //마우스를 가져가면 액션 UI를 보여준다
         private void OnMouseOver()
         {
-            //PlayerCasting.distanceFromTarget
-
-            //e키입력시 도어 오픈 
+            //거리가 2이하 일때
             if (theDistance <= 2f)
             {
-                actionUi.SetActive(true);
-                actionText.text = action;
-                extraCrossUi.SetActive(true);
+                ShowActionUI();
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetButtonDown("Action"))
                 {
-                    isOpen = !isOpen; 
-                    animator.SetBool("IsOpen", isOpen);
-                    AudioSource.Play();
+                    HideActionUI();
 
-                    // 문이 열렸을 때만 콜라이더 비활성화
-                    if (isOpen)
-                    {
-                        Collider.enabled = false; 
-                    }
-                    else
-                    {
-                        Collider.enabled = true;  
-                    }
+                    //문이 열리는 액션
+                    animator.SetBool("IsOpen", true);
+                    GetComponent<Collider>().enabled = false;
+                    audioSource.Play();
                 }
             }
-            // 플레이어가 멀어지면 UI 숨기기
             else
             {
-                actionUi.SetActive(false); 
-                extraCrossUi.SetActive(false);
+                HideActionUI();
             }
-
         }
 
+
+        //마우스가 벗어나면 액션 UI를 감춘다
         private void OnMouseExit()
         {
-            actionUi.SetActive(false);
+            HideActionUI();
+        }
+
+        void ShowActionUI()
+        {
+            actionUI.SetActive(true);
+            actionText.text = action;
+            extraCross.SetActive(true);
+        }
+
+        void HideActionUI()
+        {
+            actionUI.SetActive(false);
+            actionText.text = "";
+            extraCross.SetActive(false);
         }
     }
 }
