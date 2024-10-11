@@ -1,42 +1,37 @@
+using MyFps;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 namespace MyFps
 {
-    public class DoorCellOpen : MonoBehaviour
+
+
+    //인터렉티브 액션을 구현하는 클래스
+    public abstract class Interactive : MonoBehaviour
     {
+        protected abstract void DoAction();
+
         #region Variables
-        private float theDistance;
+        protected float theDistance;
 
         //action UI
         public GameObject actionUI;
         public TextMeshProUGUI actionText;
-        [SerializeField] private string action = "Open The Door";
+        [SerializeField] private string action = "Action Text";
         public GameObject extraCross;
 
-        //action
-        private Animator animator;
-        private Collider m_Collider;
-        public AudioSource audioSource;
         #endregion
 
-        private void Start()
-        {
-            animator = GetComponent<Animator>();
-            m_Collider = GetComponent<BoxCollider>();
-        }
 
         private void Update()
         {
             theDistance = PlayerCasting.distanceFromTarget;
         }
 
-
         //마우스를 가져가면 액션 UI를 보여준다
-        private void OnMouseOver()
+        protected void OnMouseOver()
         {
             //거리가 2이하 일때
             if (theDistance <= 2f)
@@ -46,11 +41,10 @@ namespace MyFps
                 if (Input.GetButtonDown("Action"))
                 {
                     HideActionUI();
+                    //ACtion
+                    DoAction();
 
-                    //문이 열리는 액션
-                    animator.SetBool("IsOpen", true);
-                    GetComponent<Collider>().enabled = false;
-                    audioSource.Play();
+
                 }
             }
             else
@@ -61,23 +55,26 @@ namespace MyFps
 
 
         //마우스가 벗어나면 액션 UI를 감춘다
-        private void OnMouseExit()
+        protected void OnMouseExit()
         {
             HideActionUI();
         }
 
-        void ShowActionUI()
+        protected virtual void ShowActionUI()
         {
             actionUI.SetActive(true);
             actionText.text = action;
             extraCross.SetActive(true);
         }
 
-        void HideActionUI()
+
+        protected virtual void HideActionUI()
         {
             actionUI.SetActive(false);
             actionText.text = "";
             extraCross.SetActive(false);
         }
+
     }
+
 }
