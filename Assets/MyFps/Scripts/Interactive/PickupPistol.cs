@@ -9,13 +9,13 @@ namespace MyFps
     public class PickupPistol : Interactive
     {
         #region Variables
-   
 
+        
  
         //action
         public GameObject realPistol;
         public GameObject Arrow;
-
+        public GameObject enemyTrigger;
 
         #endregion
 
@@ -23,6 +23,9 @@ namespace MyFps
         {
             realPistol.SetActive(true);
             Arrow.SetActive(false);
+
+            enemyTrigger.SetActive(true);
+
             Destroy(gameObject);
         }
 
