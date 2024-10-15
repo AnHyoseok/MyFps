@@ -34,8 +34,8 @@ namespace MyFps
             //트리거 충돌체 비활성화
             transform.GetComponent<BoxCollider>().enabled = false;
 
-
-            yield return null;
+            Destroy(this.gameObject);
+         
         }
     }
 }
