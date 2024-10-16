@@ -22,7 +22,9 @@ namespace MyFps
 
         void Start()
         {
-
+            //마우스 커버 상태 설정
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             StartCoroutine(PlaySequence());
         }
 

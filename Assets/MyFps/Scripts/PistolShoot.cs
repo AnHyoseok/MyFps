@@ -22,6 +22,9 @@ namespace MyFps
         [SerializeField] private float fireDelay = 0.5f;
         private bool isFire = false;
 
+        //총알 데미지
+       [SerializeField] private float attackDamage = 5f;
+
         #endregion
         // Start is called before the first frame update
         void Start()
@@ -52,7 +55,13 @@ namespace MyFps
             if (Physics.Raycast(firePoint.position, firePoint.TransformDirection(Vector3.forward), out hit, maxDistance))
             {
                 //적에게 데미지를 준다
-                Debug.Log("적에게 데미지를 준다");
+                Debug.Log($"{hit.transform.name}적에게 데미지를 준다");
+                RobotController robot = hit.transform.GetComponent<RobotController>();
+                if (robot != null)
+                {
+                    robot.TakeDamage(attackDamage);
+                }
+       
             }
 
             //슛 효과 - VFX,SFX
