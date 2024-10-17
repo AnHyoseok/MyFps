@@ -22,6 +22,8 @@ namespace MyFps
         public GameObject damageFlash; //데미지 플래쉬 효과
         public AudioSource[] hurts;
 
+      
+
         #endregion
 
         void Start()

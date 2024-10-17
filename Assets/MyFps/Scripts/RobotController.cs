@@ -16,7 +16,7 @@ namespace MyFps
     }
 
     //로봇 Enemy 관리 클래스
-    public class RobotController : MonoBehaviour
+    public class RobotController : MonoBehaviour, IDamageable
     {
         #region Variables
         public GameObject thePlayer;
