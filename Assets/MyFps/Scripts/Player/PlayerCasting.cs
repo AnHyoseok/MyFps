@@ -9,10 +9,12 @@ namespace MyFps
     public class PlayerCasting : MonoBehaviour
     {
         #region Variables
-        public static float distanceFromTarget;
+        public static float distanceFromTarget = Mathf.Infinity;
         [SerializeField] private float toTarget; //거리 숫자 보기
         #endregion
         // Update is called once per frame
+
+      
         void Update()
         {
             RaycastHit hit;

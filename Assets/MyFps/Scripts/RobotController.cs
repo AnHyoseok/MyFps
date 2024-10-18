@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
+using static Unity.Burst.Intrinsics.X86;
 
 namespace MyFps
 {
@@ -44,6 +45,9 @@ namespace MyFps
         [SerializeField] private float attackTimer = 2f; //공속
         float countdown = 0f;
 
+        //배경음
+        public AudioSource bgm01;   //메인씬 1 배경음
+        public AudioSource bgm02;   //적 등장 배경사운드
         #endregion
 
         // Start is called before the first frame update
@@ -153,6 +157,10 @@ namespace MyFps
 
             SetState(RobotState.R_Death);
 
+            //배경음 변경
+            bgm02.Stop();
+            bgm01.Play();
+        
             //충돌체 꺼지기
             transform.GetComponent<BoxCollider>().enabled = false;
         }
