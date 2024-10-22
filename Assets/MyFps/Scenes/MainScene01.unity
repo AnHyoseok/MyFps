@@ -13591,7 +13591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayer: {fileID: 1247884213278674553}
   arrow: {fileID: 1108051093}
-  textBox: {fileID: 56362613}
+  textBox: {fileID: 0}
   sequence: Looks like a weapon on that table.
   line03: {fileID: 1475109079}
 --- !u!1 &972416148
@@ -14580,7 +14580,7 @@ Transform:
   m_GameObject: {fileID: 1093160703}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 5.5, z: 10.5}
+  m_LocalPosition: {x: -2.54, y: 5.5, z: 10.33}
   m_LocalScale: {x: 15, y: 1, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15019,7 +15019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayer: {fileID: 1247884213278674553}
   fader: {fileID: 1522158873}
-  textBox: {fileID: 56362613}
+  textBox: {fileID: 0}
   sequence01: ...Where am I?
   sequence02: I need get out of here
   line01: {fileID: 1720020188}
@@ -49755,7 +49755,7 @@ MonoBehaviour:
   fader: {fileID: 1522158873}
   loadToScene: GameOverScene
   maxHealth: 20
-  damageFlash: {fileID: 39421842}
+  damageFlash: {fileID: 0}
   hurts:
   - {fileID: 306277919}
   - {fileID: 185327058}
