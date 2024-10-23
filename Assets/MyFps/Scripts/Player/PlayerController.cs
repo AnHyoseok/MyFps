@@ -14,7 +14,7 @@ namespace MyFps
         [SerializeField] private string loadToScene = "GameOverScene";
         //체력
         [SerializeField] private float maxHealth = 20;
-        private float currentHealth;
+        [SerializeField] private float currentHealth;
 
         private bool isDeath;
 

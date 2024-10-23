@@ -54,12 +54,18 @@ namespace MyFps
 
         public void Menu()
         {
+            loadToScene = "MainMenu";
             Time.timeScale = 1f;
-            Debug.Log("메뉴이동");  
+
+            //씬 종료 처리
+            AudioManager.Instance.StopBgm();
+            fader.FadeTo(loadToScene);
+
         }
 
         public void Restart()
         {
+        
             Time.timeScale = 1f;
             fader.FadeTo(loadToScene);
             Debug.Log("리트라이");

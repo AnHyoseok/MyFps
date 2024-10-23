@@ -99,9 +99,9 @@ namespace MyFps
             {
                 return;
             }
-            
+
             //배경음 정지
-            Stop(bgmSound);
+            StopBgm();
 
             Sound sound = null;
 
@@ -123,6 +123,12 @@ namespace MyFps
             }
 
             sound.source.Play();
+        }
+
+        //메뉴 배경음
+        public void StopBgm()
+        {
+            Stop(bgmSound);
         }
     }
 }
