@@ -14,6 +14,7 @@ namespace MyFps
         {
             //탄환 7개 지금
             PlayerStats.Instance.AddAmmo(giveAmmo);
+
             return true;
         }
     }

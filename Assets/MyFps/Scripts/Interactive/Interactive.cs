@@ -19,9 +19,11 @@ namespace MyFps
         //action UI
         public GameObject actionUI;
         public TextMeshProUGUI actionText;
-        [SerializeField] private string action = "Action Text";
+        [SerializeField] public string action = "Action Text";
         public GameObject extraCross;
 
+        //true이면 interactive 기능 정지
+        protected bool unInteractive = false;
         #endregion
 
 
@@ -33,8 +35,10 @@ namespace MyFps
         //마우스를 가져가면 액션 UI를 보여준다
         protected void OnMouseOver()
         {
+            
+
             //거리가 2이하 일때
-            if (theDistance <= 2f)
+            if (theDistance <= 2f&&!unInteractive)
             {
                 ShowActionUI();
 

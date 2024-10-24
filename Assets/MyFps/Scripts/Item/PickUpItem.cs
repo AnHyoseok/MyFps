@@ -7,7 +7,7 @@ namespace MyFps
     public class PickUpItem : MonoBehaviour
     {
         #region Variables
-        public GameObject thePlayer;
+        //public GameObject thePlayer;
 
 
         private Vector3 startPosition;  //시작 위치
@@ -17,6 +17,8 @@ namespace MyFps
 
         private float runningTime = 0f;
         private float yPos = 0f;
+
+
         #endregion
 
         private void Start()
@@ -26,14 +28,20 @@ namespace MyFps
         }
         private void Update()
         {
-            BoxMove();
+           ItemMove();
+            ItemRotate();
         }
 
-        void BoxMove()
+        void ItemMove()
         {
             runningTime += Time.deltaTime * speed;
             yPos = Mathf.Sin(runningTime) * length;
             this.transform.position = startPosition +Vector3.up * yPos;
+          
+        }
+
+        void ItemRotate()
+        {
             transform.Rotate(30f * Time.deltaTime, 20f * Time.deltaTime, 10f * Time.deltaTime);
         }
 
