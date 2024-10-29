@@ -115,10 +115,10 @@ namespace MyFps
 
         private void Attack()
         {
-            PlayerController playerController = thePlayer.GetComponent<PlayerController>();
-            if (playerController != null)
+           IDamageable damageable = thePlayer.GetComponent<IDamageable>();
+            if (damageable != null)
             {
-                playerController.TakeDamage(attackDamage);
+                damageable.TakeDamage(attackDamage);
             }
             Debug.Log("플레이어에게 데미지를 준다");
         }
@@ -130,7 +130,7 @@ namespace MyFps
                 return;
 
             //이전상태 저장
-            beforeState = newState;
+            beforeState = currentState;
 
             //상태 변경
             currentState = newState;

@@ -7,7 +7,7 @@ namespace MyFps
     #region Variables
 
     #endregion
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour,IDamageable
     {
         #region
         public SceneFader fader;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace MyFps
 {
-   public class ExitTriger : MonoBehaviour
+   public class FExitTriger : MonoBehaviour
    {
         //씬클리어
         #region Variables
