@@ -16,7 +16,7 @@ TagManager:
   - Ground
   - Player
   - Maze
-  - 
+  - test
   - 
   - 
   - 
@@ -41,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 
+    uniqueID: 405343163
     locked: 0

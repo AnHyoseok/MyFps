@@ -3,32 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace MyFps
 {
-   public class EnemyZoneInTrigger : MonoBehaviour
+   public class HEnemyZoneOutTrigger : MonoBehaviour
    {
         #region Variables
         public Transform gunMan;
 
-        public GameObject enemyZoneOut; //Out 트리거
+        public GameObject enemyInZone; //in 트리거
         #endregion
 
         private void OnTriggerEnter(Collider other)
         {
-            //건맨 추격시작
-            if(other.tag == "Player")
-            {
-                gunMan.GetComponent<Enemy>().SetState(EnemyState.E_Chase);
-
-
-            }
+            gunMan.GetComponent<Enemy>().SetState(EnemyState.E_Chase);
+            Debug.Log("적에게 제자리로 돌아가라");
+     
         }
+
         private void OnTriggerExit(Collider other)
         {
-            //gunMan 제자리로 이동
+            Debug.Log("InTrigger 활성화");
             if (other.tag == "Player")
             {
                 this.gameObject.SetActive(false);
-                enemyZoneOut.SetActive(true);
+                enemyInZone.SetActive(true);
             }
         }
+
     }
 }

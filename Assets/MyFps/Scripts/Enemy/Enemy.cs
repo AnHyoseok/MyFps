@@ -43,6 +43,15 @@ namespace MyFps
         private int nowWayPoint;
 
         private Vector3 startPosition;  //시작위치, 타겟을 잃어버렸을때 돌아갈 위치
+
+        //적 감지
+        [SerializeField] private float detectingRange = 20f;
+        private bool isAiming;
+        public bool IsAiming
+        {
+            get { return isAiming; }
+            set { isAiming = value; }
+        }
         #endregion
 
         private void Awake()
@@ -57,6 +66,7 @@ namespace MyFps
         {
             //초기화
             isDeath = false;
+            isAiming = false;
             currentHealth = maxHealth;
             nowWayPoint = 0;
             startPosition = transform.position;
@@ -79,9 +89,24 @@ namespace MyFps
             //방향 구하기(타겟 지정)
             Vector3 dir = thePlayer.transform.position - this.transform.position;
             float distance = Vector3.Distance(thePlayer.transform.position, transform.position);
+
+            if (detectingRange > 0)
+            {
+                IsAiming = distance <= detectingRange;
+            }
+
+
+
             if (distance <= attackRange)
             {
                 SetState(EnemyState.E_Attack);
+            }
+            else if (detectingRange > 0)
+            {
+                if (IsAiming)
+                {
+                    SetState(EnemyState.E_Chase);
+                }
             }
 
             switch (currentState)
@@ -113,6 +138,12 @@ namespace MyFps
                     break;
 
                 case EnemyState.E_Chase:
+                    if (detectingRange>0 && !IsAiming)
+                    {
+                        GoStartPosition();
+                        return;
+
+                    }
                     //플레이어 위치 업데이트
                     agent.SetDestination(thePlayer.position);
                     break;
@@ -139,7 +170,7 @@ namespace MyFps
             //상태변경
             currentState = newState;
             //상태변경에 따른 구현 내용
-            if (currentState == EnemyState.E_Chase)
+            if (currentState == EnemyState.E_Chase && !isDeath)
             {
                 animator.SetInteger("EnemyState", 1);
                 animator.SetLayerWeight(1, 1f);
@@ -173,6 +204,7 @@ namespace MyFps
 
             //죽었을때 충돌체 제거
             transform.GetComponent<BoxCollider>().enabled = false;
+            Destroy(gameObject, 3f);
         }
 
         //다음 웨이포인트로 이동
@@ -186,5 +218,19 @@ namespace MyFps
             agent.SetDestination(wayPoints[nowWayPoint].position);
         }
 
+        //제자리로 돌아가기
+        public void GoStartPosition()
+        {
+            if (isDeath) return;
+            SetState(EnemyState.E_Walk);
+            nowWayPoint = 0;
+            agent.SetDestination(startPosition);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, detectingRange);
+        }
     }
 }
