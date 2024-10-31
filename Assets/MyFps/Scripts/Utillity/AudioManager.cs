@@ -2,8 +2,9 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
+
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace MyFps
 {
@@ -21,12 +22,17 @@ namespace MyFps
                 return bgmSound;
             }
         }
+
+        public AudioMixer audioMixer;
         #endregion
 
         protected override void Awake()
         {
             //싱글톤 구현부
             base.Awake();
+
+            //AudioMixer
+            AudioMixerGroup[] audioMixerGroups = audioMixer.FindMatchingGroups("Master");
 
             //오디오매니저 초기화
             foreach (var sound in sounds)
@@ -36,6 +42,14 @@ namespace MyFps
                 sound.source.volume = sound.volume;
                 sound.source.pitch = sound.pitch;
                 sound.source.loop = sound.loop;
+                if (sound.loop)
+                {
+                    sound.source.outputAudioMixerGroup = audioMixerGroups[1]; //BGM
+                }
+                else
+                {
+                    sound.source.outputAudioMixerGroup = audioMixerGroups[2];  //SFX
+                }
 
             }
         }
