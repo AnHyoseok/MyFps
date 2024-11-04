@@ -59,5 +59,19 @@ namespace MyFps
 
             
         }
+        public static void DeleteData()
+        {
+            string path = Application.persistentDataPath + "/playData.dat";
+
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                Debug.Log("Save file deleted successfully.");
+            }
+            else
+            {
+                Debug.LogWarning("Save file not found, nothing to delete.");
+            }
+        }
     }
 }

@@ -10,9 +10,10 @@ namespace MyFps
         #region Variables
         public SceneFader fader;
        [SerializeField] private string loadToScene = "MainScene01";
+        int sceneNumber = PlayerStats.Instance.SceneNumber;
         #endregion
 
-                     
+
         private void Start()
         {
             //마우스 커버 상태 설정
@@ -24,7 +25,7 @@ namespace MyFps
 
         public void Retry()
         {
-            fader.FadeTo(loadToScene);
+            fader.FadeTo(sceneNumber);
             Debug.Log("리트라이");
           
         }

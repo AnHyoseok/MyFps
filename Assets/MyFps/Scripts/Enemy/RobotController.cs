@@ -7,7 +7,7 @@ using static Unity.Burst.Intrinsics.X86;
 
 namespace MyFps
 {
-    //로봇 상태 
+    //로봇 상태
     public enum RobotState
     {
         R_Idle,
@@ -16,13 +16,13 @@ namespace MyFps
         R_Death
     }
 
-    //로봇 Enemy 관리 클래스
+
+    //로봇 Enemy 관리 클레스
     public class RobotController : MonoBehaviour, IDamageable
     {
         #region Variables
         public GameObject thePlayer;
         private Animator animator;
-       
 
         //로봇 현재 상태
         private RobotState currentState;
@@ -33,60 +33,57 @@ namespace MyFps
         [SerializeField] private float maxHealth = 20;
         private float currentHealth;
 
-        //
-        private bool isDeath;
+        private bool isDeath = false;
 
         //이동
-        [SerializeField] private float moveSpeed = 2f;
+        [SerializeField] private float moveSpeed = 5f;
 
         //공격
-        [SerializeField] private float attackRange = 1.5f; //공격범위
-        [SerializeField] private float attackDamage = 5f;  //공격 데미지
-        [SerializeField] private float attackTimer = 2f; //공속
-        float countdown = 0f;
+        [SerializeField] private float attackRange = 1.5f;      //공격 가능 범위
+        [SerializeField] private float attackDamage = 5f;       //공격 데미지
+        [SerializeField] private float attackTimer = 2f;        //공격 속도
+        private float countdown = 0f;
 
         //배경음
         public AudioSource bgm01;   //메인씬 1 배경음
-        public AudioSource bgm02;   //적 등장 배경사운드
+        public AudioSource bgm02;   //적 등장 배경음
         #endregion
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             //참조
             animator = GetComponent<Animator>();
-            //초기화
-            isDeath = false;
-            currentHealth = maxHealth;
-            countdown = attackTimer;
-            SetState(RobotState.R_Idle);
 
-            
+            //초기화
+            currentHealth = maxHealth;
+            isDeath = false;
+            countdown = attackTimer;
+
+            SetState(RobotState.R_Idle);
         }
 
         private void Update()
         {
-            if(isDeath)
-            {
-                return;
-            }
+            if (isDeath) return;
 
-            //타겟지정
+            //타겟 지정
             Vector3 dir = thePlayer.transform.position - transform.position;
             float distance = Vector3.Distance(thePlayer.transform.position, transform.position);
-
             if (distance <= attackRange)
             {
                 SetState(RobotState.R_Attack);
             }
-       
+            else if (currentState != RobotState.R_Attack) // 공격 상태가 아닐 때만 걷기
+            {
+                SetState(RobotState.R_Walk);
+            }
 
             //로봇 상태 구현
             switch (currentState)
             {
                 case RobotState.R_Idle:
                     break;
-                case RobotState.R_Walk: //플레이어를 향해 걷는다
+                case RobotState.R_Walk:     //플레이어를 향해 걷는다(이동)
                     transform.Translate(dir.normalized * moveSpeed * Time.deltaTime, Space.World);
                     transform.LookAt(thePlayer.transform);
                     break;
@@ -96,42 +93,45 @@ namespace MyFps
                         SetState(RobotState.R_Walk);
                     }
                     break;
-                case RobotState.R_Death:
-                    break;
+
+                    /*case RobotState.R_Death:
+                        break;*/
             }
         }
 
         //2초마다 공격
-        //private void AttackOnTimer()
-        //{
-        //    if(countdown < 0f)
-        //    {
-        //        //공격
-        //        Attack();
-        //        countdown = attackTimer;
-        //    }
-        //    countdown -= Time.deltaTime;
-        //}
+        /*private void AttackOnTimer()
+        {
+            if(countdown < 0f)
+            {
+                //공격
+                Attack();                
+
+                //타이머 초기화
+                countdown = attackTimer;
+            }
+            countdown -= Time.deltaTime;
+        }*/
 
         private void Attack()
         {
-           IDamageable damageable = thePlayer.GetComponent<IDamageable>();
+            //Debug.Log("플레이어에게 데미지를 준다");
+            IDamageable damageable = thePlayer.GetComponent<IDamageable>();
             if (damageable != null)
             {
                 damageable.TakeDamage(attackDamage);
             }
-            Debug.Log("플레이어에게 데미지를 준다");
         }
 
         //로봇의 상태 변경
         public void SetState(RobotState newState)
-        {   //현재상태 체크
+        {
+            //현재 상태 체크
             if (currentState == newState)
                 return;
 
-            //이전상태 저장
+            //이전 상태 저장
             beforeState = currentState;
-
             //상태 변경
             currentState = newState;
 
@@ -141,9 +141,9 @@ namespace MyFps
 
         public void TakeDamage(float damage)
         {
-            currentHealth -= damage; ;
+            currentHealth -= damage;
+            //Debug.Log($"Robot Health: {currentHealth}");
 
-            Debug.Log($"로봇 체력 {currentHealth}");
             if (currentHealth <= 0 && !isDeath)
             {
                 Die();
@@ -153,17 +153,17 @@ namespace MyFps
         private void Die()
         {
             isDeath = true;
-            Debug.Log("Robot Death!");
 
+            //Debug.Log("Robot Death!!!!");
             SetState(RobotState.R_Death);
 
             //배경음 변경
             bgm02.Stop();
             bgm01.Play();
-        
-            //충돌체 꺼지기
+
+            //충돌체 제거
             transform.GetComponent<BoxCollider>().enabled = false;
+
         }
     }
-
-}
+    }

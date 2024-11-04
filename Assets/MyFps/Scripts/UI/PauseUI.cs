@@ -13,6 +13,8 @@ namespace MyFps
 
         public SceneFader fader;
         [SerializeField] private string loadToScene = "MainScene01";
+        [SerializeField] private string retryScene = "MainScene01";
+
         public GameObject pauseUI;
 
         public GameObject thePlayer;
@@ -67,8 +69,8 @@ namespace MyFps
         {
         
             Time.timeScale = 1f;
-            fader.FadeTo(loadToScene);
-            Debug.Log("리트라이");
+            fader.FadeTo(retryScene);
+            //Debug.Log("리트라이");
         }
     }
 

@@ -67,6 +67,16 @@ namespace MyFps
             sceneNumber = PlayerStats.Instance.SceneNumber;// 추가
         }
 
+        public void Restart()
+        {
+            // 저장된 데이터 삭제
+            SaveLoad.DeleteData();
+
+            Time.timeScale = 1f;
+           
+            // Debug.Log("리트라이");
+        }
+
         public void NewGame()
         {
 
@@ -97,7 +107,7 @@ namespace MyFps
 
         public void Credits()
         {
-            ShowCredit();
+            StartCoroutine(ShowCredit());
         }
 
         public void QuitGame()
@@ -163,12 +173,18 @@ namespace MyFps
             //기타...
         }
 
-        private void ShowCredit()
+     
+
+        IEnumerator ShowCredit()
         {
             mainMenuUI.SetActive(false);
             creditUI.SetActive(true);
-        }
 
+            yield return new WaitForSeconds(5f);
+
+            mainMenuUI.SetActive(true);
+            creditUI.SetActive(false);
+        }
 
     }
 }
