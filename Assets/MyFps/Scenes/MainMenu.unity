@@ -1385,7 +1385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &390353712
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1477,7 +1477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &541630443
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8120,6 +8120,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1259836572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1259836574}
+  - component: {fileID: 1259836573}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1259836573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259836572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6686530d41db73345ad0675b27bf3fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoCount: 0
+--- !u!4 &1259836574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259836572}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -44.728886, y: 0.08333349, z: 62.028015}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1283359053
 GameObject:
   m_ObjectHideFlags: 0
@@ -8138,7 +8183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1283359054
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10499,10 +10544,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fader: {fileID: 2003752078}
+  loadToScene: Intro
+  loadGameScene: {fileID: 1283359053}
   mainMenuUI: {fileID: 601749938}
-  OptionUI: {fileID: 1842653939}
-  CreditUI: {fileID: 541630442}
-  loadToScene: MainScene01
+  optionUI: {fileID: 1842653939}
+  creditUI: {fileID: 541630442}
   audioMixer: {fileID: 24100000, guid: 639bff86e4d255241bc861c333c96e8c, type: 2}
   bgmSlider: {fileID: 1100637707}
   sfxSlider: {fileID: 1501668468}
@@ -11149,6 +11195,7 @@ SceneRoots:
   - {fileID: 1847444847}
   - {fileID: 3198197612111059685}
   - {fileID: 638955332}
+  - {fileID: 1259836574}
   - {fileID: 1389199341}
   - {fileID: 1345367794}
   - {fileID: 105043127}

@@ -5214,7 +5214,7 @@ Transform:
   m_GameObject: {fileID: 290798545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.9063079, z: -0, w: -0.42261827}
-  m_LocalPosition: {x: 296.22784, y: 17, z: 343.85516}
+  m_LocalPosition: {x: 296.11923, y: 17, z: 343.99625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5340,7 +5340,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304352617}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0000336505, y: 0.89526284, z: 0.000067617155, w: -0.44553846}
+  m_LocalRotation: {x: -0.00007385835, y: 0.89919376, z: -0.00015178348, w: -0.43755072}
   m_LocalPosition: {x: 288.25037, y: 17, z: 337.82526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5663,7 +5663,7 @@ Transform:
   m_GameObject: {fileID: 575051856}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9063079, z: -0, w: -0.42261827}
-  m_LocalPosition: {x: 296.22784, y: 17, z: 343.85516}
+  m_LocalPosition: {x: 296.11923, y: 17, z: 343.99625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5878,13 +5878,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fader: {fileID: 1922326226}
-  cameraAnim: {fileID: 575051859}
   loadToScene: MainScene01
-  houseLight: {fileID: 481870958}
-  introUI: {fileID: 20462148}
   cart: {fileID: 304352618}
-  audioManager: {fileID: 1825051199}
   wayPointIndex: 0
+  cameraAnim: {fileID: 575051859}
+  introUI: {fileID: 20462148}
+  theShedLight: {fileID: 481870958}
 --- !u!4 &1026717050
 Transform:
   m_ObjectHideFlags: 0
@@ -6336,8 +6335,6 @@ MonoBehaviour:
   m_Waypoints:
   - position: {x: 1.5849533, y: 0, z: -15.885687}
     roll: 0
-  - position: {x: 2.7648911, y: 0, z: 10.096211}
-    roll: 0
   - position: {x: -0.6406875, y: 0, z: 28.555136}
     roll: 0
   - position: {x: -11.775829, y: 0, z: 58.455585}
@@ -6547,18 +6544,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1825051199 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8645258091773631282, guid: 81bd3389fcb745540bfff60dc7ffded8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1071580608}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fe066604db01584fb52c1ed1b8c41da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1887414191

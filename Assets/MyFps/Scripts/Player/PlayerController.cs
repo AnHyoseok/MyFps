@@ -22,7 +22,8 @@ namespace MyFps
         public GameObject damageFlash; //데미지 플래쉬 효과
         public AudioSource[] hurts;
 
-      
+        //무기
+        public GameObject realPistol;
 
         #endregion
 
@@ -30,6 +31,12 @@ namespace MyFps
         {
             //초기화
             currentHealth = maxHealth;
+
+            //무기획득
+            if (PlayerStats.Instance.HasGun)
+            {
+                realPistol.SetActive(true);
+            }
         }
         public void TakeDamage(float damage)
         {
@@ -55,6 +62,7 @@ namespace MyFps
         IEnumerator DamageEffect()
         {
             damageFlash.SetActive(true);
+            CinemachineShake.Instance.ShakeCamera(1f, 1f);
 
             int randNumber = Random.Range(0, 2);
             hurts[randNumber].Play();
